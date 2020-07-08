@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% block local_styles %}
+   .loader {
+        height:100%;
+        width:100%;
+        display: none;
+        border: 1px solid grey;
+        background-color: lightgrey;
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        opacity: 0.5;
+    }
+{% endblock %}
+
+{% block content %}
+<section class="jumbotron text-center">
+  <div class="container">
+    <h1>Star Wars Ratings API</h1>
+    <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+      <button class="btn btn-outline-primary my-2" data-toggle="collapse" data-target="#import_movies" aria-expanded="false" aria-controls="import_movies">
+          Import Movies
+      </button>
+      <button class="btn btn-secondary my-2" data-toggle="collapse" data-target="#list_movies" onClick="javascript:listMovies();" aria-expanded="false" aria-controls="list_movies">
+          List Movies
+      </button>
+      <div class="collapse" id="import_movies">
+
+        <div class="card card-body">
+          <p>Import movies from <a href="https://swapi.dev/">SWAPI</a></p>
+          
+          <!-- Update movies  -->
+          <form id="home_form" method="POST">
+            {% csrf_token %}
+            <div class="form-check">
+              <input id="erase_all_movies_before" name="erase_all_movies_before" type="checkbox" class="form-check-input">
+              <label class="form-check-label" for="erase_all_movies_before">Erase all movies entries</label>
+            </div>
+                    <br />
+            <button class="btn btn-outline-dark" type="button" id="confirm_before_submit">Import</button>
+          </form>
+        </div>
+      </div>
+      <div class="collapse" id="list_movies">
+        <br />
+        <div class="card card-body">
+          <table id="table_movies" class="table table-black"></table>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- Modal component -->
+<div class="modal fade" tabindex="-1" role="dialog" id="confirm-submit">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Warning!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete all movies on database and reimport them?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" id="submit_confirmed">Yes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Loader -->
+<div id="loader" class="text-center align-middle loader" >
+    <div class="vertical_center" style="padding-top: 35%;"></div>
+    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status"></div>
+</div>
+
+
+{% endblock %}
+
+{% block local_javascript %}
+<script>
+    function listMovies(url=null){
+        let content_title = "";
+        if (url === null){
+            url = "/api/movies/";
+        }
+
+        $("table#table_movies").html("");
+        $.ajax({
+            url: url,
+            success: function(data){
+                // Table header:
+                data_line = "<thead class='thead-light'>";
+                data_line += "<tr>";
+                data_line += "<th scope='col'>Movie</th>";
+                data_line += "<th scope='col'>Episode</th>";
+                data_line += "<th scope='col'>Director</th>";
+                data_line += "<th scope='col'>Release Date</th>";
+                data_line += "</tr>";
+                data_line += "</thead>";
+                data_line += "<tbody>";
+                $("table#table_movies").append(data_line);
+
+                $(data.results).each(function(i, movie) {
+                    data_line = "<tr>";
+                    data_line += "<th scope='row'>" + "<a href='" + movie.url + "'>" + movie.title + "</a></td>";
+                    data_line += "<td>" + movie.episode_n + "</td>";
+                    data_line += "<td>" + movie.director + "</td>";
+                    data_line += "<td>" + movie.release_date + "</td>";
+                    data_line += "<tr>";
+                    $("table#table_movies").append(data_line);                        
+                });
+
+               data_line = "</tbody>";
+               data_line = "<caption>Entries: " + data.count + "</caption>";
+               $("table#table_movies").append(data_line);
+            },
+
+            error: function() {
+                content_title = "An error occurred";
+                }
+        });
+
+    }
+
+    function submit_confirmed(){
+        $("div#loader").show();
+        $("form#home_form").submit();
+    }
+ 
+    $("button#submit_confirmed").click(function(){
+        submit_confirmed();
+    });
+ 
+    $("button#confirm_before_submit").click(function(){
+        if ($("input#erase_all_movies_before:checked").length > 0){
+            $("div#confirm-submit").modal("show");
+        }
+        else {
+            submit_confirmed();
+        }
+    });
+</script>
+
+{% endblock %}
