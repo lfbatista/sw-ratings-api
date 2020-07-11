@@ -62,7 +62,7 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 10,
     "DEFAULT_FILTER_BACKENDS": (
         "rest_framework.filters.SearchFilter",
-     )
+     ),
 }
 
 WSGI_APPLICATION = "movies.wsgi.application"

@@ -1,7 +1,10 @@
+*.sqlite
 *.pyc
 __pycache__/
 .coverage
 .coveragerc
 .idea
+db*
 htmlcov
 venv
+migrations/

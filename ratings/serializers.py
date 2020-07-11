@@ -4,44 +4,32 @@ from ratings.models import *
 
 
 class MovieSerializer(serializers.HyperlinkedModelSerializer):
-    #    ratings = serializers.HyperlinkedRelatedField(
-    #        many=True, view_name="rating-detail", read_only=True
-    #    )
-
     class Meta:
         model = Movie
         fields = [
             "id",
             "title",
             "created",
-            "episode_n",
+            "episodeno",
             "director",
-            #            "ratings",
+            "ratings",
             "release_date",
             "url",
-            # "owner"
         ]
 
 
 class RatingSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source="owner.username")
-    #    movie = serializers.HyperlinkedRelatedField(
-    #        #many=True,
-    #        view_name="movie-detail", read_only=True
-    #    )
 
     class Meta:
         model = Rating
-        fields = ["id", "comment", "owner", "rating", "url", "movies"]
+        fields = ["id", "comment", "owner", "rating", "url", "movie"]
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     ratings = serializers.HyperlinkedRelatedField(
         many=True, view_name="rating-detail", read_only=True
     )
-    # movies = serializers.HyperlinkedRelatedField(
-    #     many=True, view_name="movie-detail", read_only=True
-    # )
 
     class Meta:
         model = User
