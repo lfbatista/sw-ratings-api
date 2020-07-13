@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "ratings",
+    "resources",
 ]
 
 MIDDLEWARE = [
@@ -39,7 +39,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "movies.urls"
+ROOT_URLCONF = "ratingsapi.urls"
 
 TEMPLATES = [
     {
@@ -65,7 +65,7 @@ REST_FRAMEWORK = {
      ),
 }
 
-WSGI_APPLICATION = "movies.wsgi.application"
+WSGI_APPLICATION = "ratingsapi.wsgi.application"
 
 
 # Database

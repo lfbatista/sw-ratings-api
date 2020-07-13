@@ -2,8 +2,8 @@ import requests
 from django.shortcuts import render
 from django.views import View
 from rest_framework import permissions, viewsets
-from ratings.permissions import IsOwnerOrReadOnly
-from ratings.serializers import *
+from resources.permissions import IsOwnerOrReadOnly
+from resources.serializers import *
 
 
 class MovieViewSet(viewsets.ReadOnlyModelViewSet):
@@ -40,7 +40,7 @@ class RatingViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """Get users list and user details."""
 
-    queryset = User.objects.all()
+    queryset = User.objects.all().order_by("id")
     serializer_class = UserSerializer
 
 

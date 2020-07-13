@@ -1,0 +1,33 @@
+[
+  {
+    "model": "resources.rating",
+    "pk": 1,
+    "fields": {
+      "rating": 5,
+      "comment": "awesome",
+      "owner": 1,
+      "movie": 1
+    }
+  },
+  {
+    "model": "resources.rating",
+    "pk": 2,
+    "fields": {
+      "rating": 5,
+      "comment": "masterpice",
+      "owner": 1,
+      "movie": 2
+    }
+  },
+  {
+    "model": "resources.rating",
+    "pk": 3,
+    "fields": {
+      "rating": 2,
+      "comment": "crap",
+      "owner": 1,
+      "movie": 4
+    }
+  }
+]
+

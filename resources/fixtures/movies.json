@@ -1,0 +1,68 @@
+[
+  {
+    "model": "resources.movie",
+    "pk": 1,
+    "fields": {
+      "created": "2020-07-13T10:36:19.643Z",
+      "title": "A New Hope",
+      "episodeno": 4,
+      "director": "George Lucas",
+      "release_date": "1977-05-25"
+    }
+  },
+  {
+    "model": "resources.movie",
+    "pk": 2,
+    "fields": {
+      "created": "2020-07-13T10:36:19.660Z",
+      "title": "The Empire Strikes Back",
+      "episodeno": 5,
+      "director": "Irvin Kershner",
+      "release_date": "1980-05-17"
+    }
+  },
+  {
+    "model": "resources.movie",
+    "pk": 3,
+    "fields": {
+      "created": "2020-07-13T10:36:19.669Z",
+      "title": "Return of the Jedi",
+      "episodeno": 6,
+      "director": "Richard Marquand",
+      "release_date": "1983-05-25"
+    }
+  },
+  {
+    "model": "resources.movie",
+    "pk": 4,
+    "fields": {
+      "created": "2020-07-13T10:36:19.678Z",
+      "title": "The Phantom Menace",
+      "episodeno": 1,
+      "director": "George Lucas",
+      "release_date": "1999-05-19"
+    }
+  },
+  {
+    "model": "resources.movie",
+    "pk": 5,
+    "fields": {
+      "created": "2020-07-13T10:36:19.687Z",
+      "title": "Attack of the Clones",
+      "episodeno": 2,
+      "director": "George Lucas",
+      "release_date": "2002-05-16"
+    }
+  },
+  {
+    "model": "resources.movie",
+    "pk": 6,
+    "fields": {
+      "created": "2020-07-13T10:36:19.695Z",
+      "title": "Revenge of the Sith",
+      "episodeno": 3,
+      "director": "George Lucas",
+      "release_date": "2005-05-19"
+    }
+  }
+]

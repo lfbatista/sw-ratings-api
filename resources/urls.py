@@ -1,5 +1,5 @@
 from django.conf.urls import include, url
-from ratings.views import *
+from resources.views import *
 from rest_framework.routers import DefaultRouter
 
 # Register viewsets
